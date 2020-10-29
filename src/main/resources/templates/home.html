@@ -5,6 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:text="${al1} "></p>
+<ul th:each="al1 : ${al1}">
+    <li th:text="${al1}"></li>
+</ul>
 </body>
 </html>

@@ -20,17 +20,16 @@ public class MainController {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con= DriverManager.getConnection(connectionurl,username,password);
         Statement statement = con.createStatement();
-        statement.executeUpdate("drop table table1");
-        statement.executeUpdate("create table table1(text varchar(20))");
-        statement.executeUpdate("insert into table1 (text) values ('hello world')");
-        statement.executeUpdate("insert into table1 (text) values ('Привіт світ')");
         ResultSet resultSet = statement.executeQuery("select * from table1");
         List<String> al1=new ArrayList<String>();
         while(resultSet.next())
         {
             String text = resultSet.getString("text");
-            al1.add(text);}
+            al1.add(text);
+        }
+
         model.addAttribute("al1" , al1);
+
 
         return "home";
     }
