@@ -5,9 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<ul th:each="al1 : ${al1}">
-    <li th:text="${al1}"></li>
-</ul>
-<a href="/addtext">Добавити текст в базу</a>
+<form action="/addtext" method="post">
+    <p>Текст:</p>
+    <input type="text" th:name="string"/>
+    <br/><br/><br/>
+    <button type="submit">Добавити</button>
+</form>
 </body>
 </html>
