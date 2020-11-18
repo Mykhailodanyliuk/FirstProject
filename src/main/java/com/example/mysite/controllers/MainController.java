@@ -36,6 +36,27 @@ public class MainController {
 
         return "home";
     }
+    @PostMapping("/")
+    public String deletetext(@RequestParam String delete) throws Exception {
+        try {
+            String username = "root";
+            String password = "root";
+            String connectionurl = "jdbc:mysql://localhost:3307/mydata?autoReconnect=true&useSSL=false";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(connectionurl, username, password);
+            String query1 = " delete from table1 where text=(?)";
+            PreparedStatement preparedStmt1 = con.prepareStatement(query1);
+            preparedStmt1.setString(1, delete);
+            preparedStmt1.execute();
+        }
+        catch (Exception e)
+        {
+            System.err.println("Got an exception!");
+            System.err.println(e.getMessage());
+        }
+        return "home";
+    }
+
     @GetMapping("/addtext")
     public String addtext(Model model){
         return "addtext";
@@ -60,7 +81,7 @@ public class MainController {
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
         }
-        return "addText";
+        return "/addtext";
     }
 
             }
