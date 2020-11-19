@@ -5,14 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<form action="/" method="post">
-    <p>Текст:</p>
-    <input type="text" name="delete"/>
-    <br/>
-    <button type="submit" >Видалити</button>
-</form>
-<ul th:each="al1 : ${al1}">
-    <li th:text="${al1}"></li>
+<ul th:each="line : ${lines}">
+    <li th:text="${line}"></li>
+    <form action="/" method="post">
+        <input type="hidden" th:value="${line}" name="delete"/>
+        <button type="submit" >Видалити</button>
+    </form>
+
 </ul>
 <a href="/addtext">Добавити текст в базу</a>
 

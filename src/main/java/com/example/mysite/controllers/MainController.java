@@ -24,14 +24,14 @@ public class MainController {
         Connection con= DriverManager.getConnection(connectionurl,username,password);
         Statement statement = con.createStatement();
         ResultSet resultSet = statement.executeQuery("select * from table1");
-        List<String> al1=new ArrayList<String>();
+        List<String> lines=new ArrayList<String>();
         while(resultSet.next())
         {
             String text = resultSet.getString("text");
-            al1.add(text);
+            lines.add(text);
         }
 
-        model.addAttribute("al1" , al1);
+        model.addAttribute("lines" , lines);
 
 
         return "home";
@@ -54,7 +54,7 @@ public class MainController {
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
         }
-        return "home";
+        return "redirect:/";
     }
 
     @GetMapping("/addtext")
@@ -81,7 +81,7 @@ public class MainController {
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
         }
-        return "/addtext";
+        return "redirect:/";
     }
 
             }
