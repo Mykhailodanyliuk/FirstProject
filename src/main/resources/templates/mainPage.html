@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Головна сторінка</title>
+</head>
+<body>
+
+<table>
+    <tr><th>Назва</th><th>Тип товару</th><th>Ціна</th><th></th></tr>
+    <tr th:each="el: ${products}" class="alert alert-into mt2">
+        <td th:text="${el.name}"></td>
+        <td th:text="${el.typeProduct}"></td>
+        <td th:text="${el.price}"></td>
+        <td><form th:action="'/' + ${el.id} + '/remove'" method="post">
+            <button type="submit">Видалити</button>
+        </form></td>
+    </tr>
+</table>
+
+
+<a href="/addProduct">Добавити товар</a>
+
+</body>
+</html>

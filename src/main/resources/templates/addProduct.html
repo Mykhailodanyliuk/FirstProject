@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="name"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form action="/addProduct" method="post">
+    <input type="text" name="name" placeholder="Назву товару">
+    <input type="text" name="typeProduct" placeholder="Тип товару">
+    <input type="text" name="price" placeholder="Ціна">
+    <button type="submit">Добавити товар</button>
+</form>
+
+</body>
+</html>
