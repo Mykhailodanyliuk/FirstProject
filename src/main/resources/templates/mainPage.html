@@ -17,7 +17,7 @@
         <td th:text="${el.name}"></td>
         <td th:text="${el.typeProduct}"></td>
         <td th:text="${el.price}"></td>
-        <td><form th:action="'/main' + ${el.id_product} + '/remove'" method="post">
+        <td><form th:action="'/main' + ${el.id} + '/remove'" method="post">
             <button type="submit">Видалити</button>
         </form></td>
     </tr>
