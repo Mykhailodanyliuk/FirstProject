@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Головна сторінка</title>
 </head>
 <body>
+
+<h2 th:inline="text">Привіт [[${#httpServletRequest.remoteUser}]]!</h2>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Вийти"/>
+</form>
 
 <table>
     <tr><th>Назва</th><th>Тип товару</th><th>Ціна</th><th></th></tr>
@@ -12,7 +17,7 @@
         <td th:text="${el.name}"></td>
         <td th:text="${el.typeProduct}"></td>
         <td th:text="${el.price}"></td>
-        <td><form th:action="'/' + ${el.id} + '/remove'" method="post">
+        <td><form th:action="'/main' + ${el.id_product} + '/remove'" method="post">
             <button type="submit">Видалити</button>
         </form></td>
     </tr>

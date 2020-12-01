@@ -3,11 +3,14 @@ package com.example.mysite.controllers;
 import com.example.mysite.models.Product;
 import com.example.mysite.repo.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.*;
+import java.util.Map;
 
 
 @Controller
@@ -17,22 +20,32 @@ public class MainController {
     private ProductRepository productRepository;
 
     @GetMapping("/")
+    public String LoginPage(Map<String,Object> model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken))
+            return "redirect:/main";
+
+        return "login";
+    }
+
+
+    @GetMapping("/main")
     public String Page(Model model){
         Iterable<Product> products = productRepository.findAll();
         model.addAttribute("products",products);
-        return "mainPage";
+        return "mainPage.html";
     }
 
-    @PostMapping("/{id}/remove")
+    @PostMapping("/main{id}/remove")
     public String deleteProduct(@PathVariable(value = "id") long id, Model model) {
         Product product = productRepository.findById(id).orElseThrow();
         productRepository.delete(product);
-        return "redirect:/";
+        return "redirect:/main";
     }
 
     @GetMapping("/addProduct")
     public String add(Model model){
-        return "addProduct";
+        return "addProduct.html";
     }
 
     @PostMapping("/addProduct")
@@ -40,7 +53,7 @@ public class MainController {
 
         Product product = new Product(name,typeProduct,price);
         productRepository.save(product);
-        return "redirect:/";
+        return "redirect:/main";
     }
 
 
