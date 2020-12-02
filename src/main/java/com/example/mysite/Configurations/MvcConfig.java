@@ -13,7 +13,7 @@ import java.util.Map;
 public class MvcConfig implements WebMvcConfigurer {
 
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("login.html");
+        registry.addViewController("/login").setViewName("login.html");
     }
 
 }

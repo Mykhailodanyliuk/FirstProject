@@ -29,13 +29,13 @@ public class RegistrationController {
         if (userFromDb != null){
 
             model.put("message","User exists!");
-            return "registartion";
+            return "registration";
 
         }
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         userRepository.save(user);
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 }
