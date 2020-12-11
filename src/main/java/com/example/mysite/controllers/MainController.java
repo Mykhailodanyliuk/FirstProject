@@ -39,12 +39,12 @@ public class MainController {
 //        if (!(auth instanceof AnonymousAuthenticationToken))
 //            return "redirect:/";
 //
-        return "login";
+        return "login.html";
     }
 
     @GetMapping("/addProduct")
     public String add(Model model){
-        return "addProduct.html";
+        return "addProduct";
     }
 
     @PostMapping("/addProduct")

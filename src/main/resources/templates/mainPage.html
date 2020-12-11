@@ -1,49 +1,99 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<style>
+    body {
+        padding: 0;
+        font-family: sans-serif;
+        background: wheat;
+        margin: 20%;
+    }
+
+
+    .box {
+        margin: 5%;
+        width: auto;
+        padding: 20px;
+        border: 4px wheat;
+        border-radius: 8px;
+        background: #2ecc71;
+    }
+
+</style>
 <head>
     <meta charset="UTF-8">
     <title>Головна сторінка</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 <body>
-
-<!--<h2 th:inline="text">Привіт [[${#httpServletRequest.remoteUser}]]!</h2>-->
-<!--<form th:action="@{/logout}" method="post">-->
-<!--    <input type="submit" value="Вийти"/>-->
-<!--</form>-->
-
-<div sec:authorize="!isAuthenticated()" class="nav-item">
-    <form th:action="@{/login}">
-        <input type="submit" value="Увійти"/>
-    </form>
-    <form th:action="@{/registration}">
-        <input type="submit" value="Реєстрація"/>
-    </form>
-<!--    <a th:href="@{/login}">Увійти</a><br>-->
-<!--    <a th:href="@{/registration}">Реєстрація</a>-->
-</div>
-<div sec:authorize="isAuthenticated()" >
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Вийти"/>
-    </form>
-</div>
-
-<table>
-    <tr><th>Назва</th><th>Тип товару</th><th>Ціна</th><th></th></tr>
-    <tr th:each="el: ${products}" class="alert alert-into mt2">
-        <td th:text="${el.name}"></td>
-        <td th:text="${el.typeProduct}"></td>
-        <td th:text="${el.price}"></td>
-        <td><form th:action="'/' + ${el.id} + '/remove'" method="post">
-            <button type="submit">Видалити</button>
-        </form></td>
-    </tr>
-</table>
-
-<div sec:authorize="isAuthenticated()">
-    <a href="/addProduct">Добавити товар</a>
-</div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" >DnlkSite</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <div sec:authorize="isAuthenticated()">
+                        <a class="btn btn-outline-success me-2" href="/addProduct">Добавити товар</a>
+                    </div>
+                    <div sec:authorize="!isAuthenticated()" class="nav-item">
+                        <form th:action="@{/login}">
+                            <button class="btn btn-outline-success me-2" type="submit">Увійти</button>
+                        </form>
+                    </div>
+                    <div sec:authorize="!isAuthenticated()" class="nav-item">
+                        <form th:action="@{/registration}">
+                            <button class="btn btn-outline-success me-2" type="submit">Реєстрація</button>
+                        </form>
+                    </div>
+                    <div sec:authorize="isAuthenticated()" class="nav-item">
+                        <form th:action="@{/logout}" method="post">
+                            <input class="btn btn-outline-success me-2" type="submit" value="Вийти"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
 
+
+    <div class="container">
+        <div class="row row-cols-3">
+            <div th:each="el: ${products}" class="col">
+                <div class="box">
+                    <a th:text="${el.name}"></a><br>
+                    <a th:text="${el.typeProduct}"></a><br>
+                    <a th:text="${el.price}">$</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<!--    <table>-->
+<!--        <tr><th>Назва</th><th>Тип товару</th><th>Ціна</th><th></th></tr>-->
+<!--        <tr th:each="el: ${products}" class="alert alert-into mt2">-->
+<!--            <td th:text="${el.name}"></td>-->
+<!--            <td th:text="${el.typeProduct}"></td>-->
+<!--            <td th:text="${el.price}"></td>-->
+<!--            <div sec:authorize="isAuthenticated()">-->
+<!--                <td><form th:action="'/' + ${el.id} + '/remove'" method="post">-->
+<!--                    <button type="submit">Видалити</button>-->
+<!--                </form></td>-->
+<!--            </div>-->
+<!--        </tr>-->
+<!--    </table>-->
+
+    <div sec:authorize="isAuthenticated()">
+        <a href="/addProduct">Добавити товар</a>
+    </div>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>
